@@ -22,9 +22,5 @@ Il propose :
 - **Lombok** : pour getters/setters, constructeur  
 - **Build Tool** : Maven  
 - **API Testing** : Postman / curl  
-- **JSON Mapping** : DTOs pour éviter les boucles infinies  
-
----
-
-## 📂 Structure du projet
+- **JSON Mapping** : DTOs pour éviter les boucles infinies
 
