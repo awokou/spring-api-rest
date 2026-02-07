@@ -1,4 +1,4 @@
-# Spring API REST - Gestion de Produits et Catégories
+# API REST
 
 ## 🌟 Description
 
