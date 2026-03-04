@@ -9,12 +9,10 @@ Il propose :
 - Contrôle des doublons lors de l’insertion  
 - Base de données H2 en mémoire pour tests  
 
----
-
 ## 🛠️ Stack technique
 
 - **Langage** : Java 21
-- **Framework** : Spring Boot 4 
+- **Framework** : Spring Boot 4.0.+ 
 - **Modules Spring utilisés** :  
   - Spring Web  
   - Spring Data JPA   
