@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "categories")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Categorie implements Serializable {
+public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,13 @@ public class Categorie implements Serializable {
     // Relation récursive
     @ManyToOne
     @JoinColumn(name = "parent_id")
-    private Categorie parent;
+    private Category parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-    private List<Categorie> sousCategories;
+    private List<Category> sousCategories;
 
     // Relation avec Produit
     @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
-    private List<Produit> produits;
+    private List<Product> produits;
 
 }

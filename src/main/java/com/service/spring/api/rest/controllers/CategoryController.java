@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.spring.api.rest.dto.CategorieDto;
-import com.service.spring.api.rest.services.CategorieService;
+import com.service.spring.api.rest.services.CategoryService;
 
 @RestController
 @RequestMapping("/api/categories")
-public class CategorieController {
+public class CategoryController {
 
-    private final CategorieService categorieService;
+    private final CategoryService categorieService;
 
-    public CategorieController(CategorieService categorieService) {
+    public CategoryController(CategoryService categorieService) {
         this.categorieService = categorieService;
     }
 

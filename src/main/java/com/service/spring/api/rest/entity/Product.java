@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "produits")
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produit implements Serializable {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +25,5 @@ public class Produit implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "categorie_id", nullable = false)
-    private Categorie categorie;
+    private Category categorie;
 }

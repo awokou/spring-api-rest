@@ -5,10 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.service.spring.api.rest.entity.Categorie;
-import com.service.spring.api.rest.entity.Produit;
-import com.service.spring.api.rest.repository.CategorieRepository;
-import com.service.spring.api.rest.repository.ProduitRepository;
+import com.service.spring.api.rest.entity.Category;
+import com.service.spring.api.rest.entity.Product;
+import com.service.spring.api.rest.repository.CategoryRepository;
+import com.service.spring.api.rest.repository.ProductRepository;
 
 @SpringBootApplication
 public class SpringApiRestApplication {
@@ -18,37 +18,37 @@ public class SpringApiRestApplication {
 	}
 
 	@Bean
-	CommandLineRunner initDatabase(CategorieRepository categorieRepository, ProduitRepository produitRepository) {
+	CommandLineRunner initDatabase(CategoryRepository categorieRepository, ProductRepository produitRepository) {
 		return args -> {
 			// ===== Catégories =====
-			Categorie electronique = categorieRepository.findByNom("Électronique")
+			Category electronique = categorieRepository.findByNom("Électronique")
 					.orElseGet(() -> {
-						Categorie c = new Categorie();
+						Category c = new Category();
 						c.setNom("Électronique");
 						c.setDescription("Tous les produits électroniques");
 						return categorieRepository.save(c);
 					});
 
-			Categorie vetements = categorieRepository.findByNom("Vêtements")
+			Category vetements = categorieRepository.findByNom("Vêtements")
 					.orElseGet(() -> {
-						Categorie c = new Categorie();
+						Category c = new Category();
 						c.setNom("Vêtements");
 						c.setDescription("Tous les vêtements");
 						return categorieRepository.save(c);
 					});
 
 			// Sous-catégories
-			Categorie smartphones = categorieRepository.findByNomAndParent("Smartphones", electronique)
+			Category smartphones = categorieRepository.findByNomAndParent("Smartphones", electronique)
 					.orElseGet(() -> {
-						Categorie c = new Categorie();
+						Category c = new Category();
 						c.setNom("Smartphones");
 						c.setParent(electronique);
 						return categorieRepository.save(c);
 					});
 
-			Categorie ordinateurs = categorieRepository.findByNomAndParent("Ordinateurs", electronique)
+			Category ordinateurs = categorieRepository.findByNomAndParent("Ordinateurs", electronique)
 					.orElseGet(() -> {
-						Categorie c = new Categorie();
+						Category c = new Category();
 						c.setNom("Ordinateurs");
 						c.setParent(electronique);
 						return categorieRepository.save(c);
@@ -63,16 +63,16 @@ public class SpringApiRestApplication {
 	}
 
 	// Méthode utilitaire pour les produits
-	private void insertProduitSiAbsent(ProduitRepository produitRepository,
-			String nom, Categorie categorie, double prix, int stock) {
+	private void insertProduitSiAbsent(ProductRepository produitRepository,
+			String nom, Category categorie, double prix, int stock) {
 		boolean exists = produitRepository.existsByNomAndCategorie(nom, categorie);
 		if (!exists) {
-			Produit p = new Produit();
-			p.setNom(nom);
-			p.setCategorie(categorie);
-			p.setPrix(prix);
-			p.setStock(stock);
-			produitRepository.save(p);
+			Product produit = new Product();
+			produit.setNom(nom);
+			produit.setCategorie(categorie);
+			produit.setPrix(prix);
+			produit.setStock(stock);
+			produitRepository.save(produit);
 		}
 	}
 }

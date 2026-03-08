@@ -1,17 +1,20 @@
-package com.service.spring.api.rest.mappers;
+package com.service.spring.api.rest.mapper;
 
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.service.spring.api.rest.dto.CategorieDto;
-import com.service.spring.api.rest.entity.Categorie;
+import com.service.spring.api.rest.entity.Category;
 
-public class CategorieMapper {
+@Component
+public class CategoryMapper {
 
-    public static CategorieDto toDTO(Categorie categorie) {
+    public CategorieDto mapToCategorieDto(Category categorie) {
         if (categorie == null)
             return null;
 
-        CategorieDto dto = new CategorieDto(
+        CategorieDto categorieDto = new CategorieDto(
                 categorie.getId(),
                 categorie.getNom(),
                 categorie.getDescription(),
@@ -19,13 +22,13 @@ public class CategorieMapper {
 
         // Mapping récursif contrôlé
         if (categorie.getSousCategories() != null) {
-            dto.setSousCategories(
+            categorieDto.setSousCategories(
                     categorie.getSousCategories()
                             .stream()
-                            .map(CategorieMapper::toDTO)
+                            .map(this::mapToCategorieDto)
                             .collect(Collectors.toList()));
         }
 
-        return dto;
+        return categorieDto;
     }
 }
